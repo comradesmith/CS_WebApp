@@ -139,6 +139,11 @@ function togglecoursedata(course_id) {
 function people_process() {
 	var json = JSON.parse(response);	
 	json = json.list;
+	json.sort(function(a, b){
+		if( a.lastname < b.lastname) return -1;
+		if( a.lastname > b.lastname) return 1;
+		return 0;
+	});
 	var personTemplate = "<table><tr><th>{0}</th></tr><tr><td><p>{1}</p></td></tr></table><br>";
 	var vcardLinkTemplate = '<a href="' + vcard_url + '{0}">☎</a>';
 	var person;

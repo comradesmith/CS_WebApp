@@ -140,6 +140,7 @@ section {
 	background: #88BBFA;
 	font-size: 400%;
 	text-align: center;
+	line-height: 120px;
 }
 
 .persondescription {
@@ -208,7 +209,6 @@ aside {
 	float: right;
 	padding: 8px;
 }
-
 
 
 @media screen and (min-width:380px){
