@@ -1,0 +1,317 @@
+* {
+	font-size: large;
+	margin:0; 
+	padding:0;
+	font-family: sans-serif;
+
+}
+
+body, html{	
+	height: 100%;
+	width: 100%;
+	background: #88BBFA;
+}
+
+p {
+	font-size: large;
+}
+
+a {
+	color:inherit;
+	text-decoration: none;
+ }
+
+header {
+	top: 0px;
+	text-align: center;
+	width: 95%;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:	20px;
+	margin-bottom: 20px;
+}
+
+#logo {
+	max-width: 200px;
+}
+
+nav {
+	width: 100%;
+	max-width: 416px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+#navdiv {
+	display: inline-block;
+}
+
+ul {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+li {
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	float: none;	
+	list-style: none;
+	padding: 6px;
+	border-radius: 4px;
+}
+
+li:hover  {
+	color: #8A85DA;
+	cursor: pointer;
+}
+
+li a {
+	display: inline-block;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+section {
+	width: 99%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#coursestable {
+	text-align: left;
+}
+
+#coursestable th p {
+	font-size: smaller;
+	margin-top: 4px;
+	margin-bottom: 0px;
+}
+
+#coursestable p {
+	margin-bottom: 8px;
+	margin-right: 4px;
+}
+
+.coursedata {
+	display: none;
+	text-align: justify;
+	
+}
+
+.coursetogglebutton {
+	float: right;
+	margin-top: 4px;
+	margin-right: 10px;
+	font-size: 140%;
+}
+
+.coursetogglebutton:hover {
+	color: #8A85DA;
+	cursor: pointer;
+}
+
+#peopletable {
+	max-width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.personname {
+	width: 115px;
+	overflow: visible;
+	float: left;
+	text-align: left;
+}
+
+.personname p {
+	width: 200%;
+}
+
+.personplaceholder {
+	height: 115px;
+	width: 115px;
+	border-radius: 10px;
+	background: #88BBFA;
+	font-size: 400%;
+	text-align: center;
+}
+
+.persondescription {
+	float: right;
+	text-align: right;
+	margin-top: 10px;
+	margin-left: 118px;
+	margin-right: 10px;
+	margin-bottom: -115px;
+}
+
+.persondescription h6 {
+	font-size: 70%;
+	color: #FFFFFF;
+}
+
+.persondescription p {
+	font-size: 55%;
+}
+
+#newscontent th {
+	text-align: left;
+}
+
+#newscontent td {
+	text-align: justify;
+}
+
+#newscontent th a {
+	font-size: 90%;
+}
+
+#newscontent th p {
+	font-size: 65%;
+	color: white;
+}
+
+#newscontent td a {
+	font-size: 75%;
+}
+
+table, tr, td, th {
+	border: 3px solid white;
+	border-collapse: collapse;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+th {
+	color: #CCDDFF;
+	background: #4A45CA;;
+}
+
+td {
+	color: #4A45CA;
+	background: white;
+}
+
+.invisible {
+	visibility: hidden;
+	border: 0px solid white
+}
+
+aside {
+	float: right;
+	padding: 8px;
+}
+
+
+
+@media screen and (min-width:380px){
+	/* screens > 380px */
+
+	* {
+		font-size: large;
+	}
+
+	header {
+	}
+	
+	section {
+		width: 85%;
+	}
+
+	nav {
+	}
+
+	#peopletable {
+		min-width: 318px;
+	}
+
+	.personname p {
+		width: 250%;
+	}
+	
+}
+
+
+@media screen and (min-width:703px){
+	/* screens > 683px */
+
+	* {
+		font-size: medium;
+	}	
+	
+	section {
+		width: 75%;
+	}
+
+	ul {
+		padding-left: 40px;
+	}
+
+	li {
+		float: left;	
+		margin-left: 8px;
+		margin-right: 10px;
+	}
+	
+	nav {
+		max-width: 416px;
+	}
+
+	.persondescription h6 {
+		font-size: 80%;
+	}
+
+	.persondescription p {
+		font-size: 65%;
+	}
+
+	.personname p {
+		width: 375%;
+	}
+
+}
+
+
+@media screen and (min-width:1100px){
+	/* screens > 1100px */
+
+	* {
+		font-size: small;
+	}
+
+	a {
+		font-size: medium;
+	}
+	
+	section {
+		width: 900px;
+	}
+
+	li {
+		float: left;
+	}
+
+	nav {
+		width: 100%;
+		max-width: none;
+	}
+
+	.persondescription {
+		margin-right: 14px;
+	}
+	
+	.persondescription h6 {
+		font-size: 110%;
+	}
+
+	.persondescription p {
+		font-size: 90%;
+	}
+}
