@@ -161,24 +161,29 @@ section {
 	font-size: 55%;
 }
 
-#newscontent th {
+.feed th {
 	text-align: left;
 }
 
-#newscontent td {
+.feed td {
 	text-align: justify;
 }
 
-#newscontent th a {
+.feed td p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.feed th a {
 	font-size: 90%;
 }
 
-#newscontent th p {
+.feed th p {
 	font-size: 65%;
 	color: white;
 }
 
-#newscontent td a {
+.feed td a {
 	font-size: 75%;
 }
 

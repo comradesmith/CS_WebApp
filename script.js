@@ -1,7 +1,7 @@
 var courses_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/courses"
 var people_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/people"
 var news_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/newsfeed"
-var notices_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/notices"
+var notices_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/noticesfeed"
 
 var vcard_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/vcard?u="
 var photo_url = "https://unidirectory.auckland.ac.nz/people/imageraw/{0}/{1}/small"
@@ -32,6 +32,10 @@ function data_fetch(url, type){
 						break;
 					case "news":
 						news_process();
+						break;
+					case "notices":
+						notices_process();
+						break;
 				}
 			}
 			else{
@@ -239,9 +243,41 @@ function news_process() {
 
 	}
 
-	document.getElementById("newscontent").innerHTML = news;
+	console.log("news updated");
+	content.innerHTML = news;
 
 }
+
+
+function notices_process() {
+
+	var content = document.getElementById("noticecontent");
+	var notice_template = "<table><tr><th>{0}</th></tr><tr><td>{1}</td></tr></table>"
+	var notices = "";
+	
+	var parser = new DOMParser();
+	var xml = parser.parseFromString(response, "text/xml");
+	var items = xml.getElementsByTagName("item");
+
+	for(var i = 0; i < 5; i++) {
+		var item = items[i];
+		var title = item.children[0].innerHTML;
+		var description = item.children[1].innerHTML;
+		var link = item.children[2].innerHTML;
+		var date = item.children[4].innerHTML;
+
+		var head = "<a href=\"" + link + "\">" + title + "</a>" + "<p>" + date + "</p>";
+		var body = "<p>" + description + "</p><a href=\"" + link+ "\">Source</a>";
+
+		notices += notice_template.format(head, body) + "<br>";
+
+	}
+
+	console.log("notices updated");
+	content.innerHTML = notices;
+
+}
+
 
 
 function section_display_toggle(id) {
@@ -276,6 +312,9 @@ window.onload = function() {
 	data_fetch(courses_url, "courses");
 	data_fetch(people_url, "people");
 	data_fetch(news_url, "news");
+	data_fetch(notices_url, "notices");
 
 	section_display_toggle("home");
+	setInterval(function(){data_fetch(news_url, "news")}, 10000);
+	setInterval(function(){data_fetch(notices_url, "notices")}, 10000);
 }
