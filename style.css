@@ -187,6 +187,49 @@ section {
 	font-size: 75%;
 }
 
+textarea {
+	resize: none;
+}
+
+#comment {
+	width: 100%;
+}
+
+#guestbookcomments table{
+	background: #FFFFFF;
+	padding: 16px;
+}
+
+#guestbookcomments th {
+	color: #FFFFFF;
+	padding: 10px;
+}
+
+#guestbookcomments td p {
+	margin-bottom: 40px;
+	border: 2px solid #4A45CA;
+	padding: 10px;
+}
+
+#guestbookcomments td b {
+	color: #4A45CA;
+}
+
+#guestbookcomments td em {
+	min-width: 100%;
+	display: block;
+}
+
+#postbutton {
+	color: #FFFFFF;
+	background: #4A45CA;
+	width: 60px;
+	padding: 6px;
+	float: right;
+	margin-top: 4px;
+	margin-bottom: 16px;
+}
+
 table, tr, td, th {
 	border: 3px solid white;
 	border-collapse: collapse;

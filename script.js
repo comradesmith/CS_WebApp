@@ -2,6 +2,8 @@ var courses_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/cours
 var people_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/people"
 var news_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/newsfeed"
 var notices_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/noticesfeed"
+var comments_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/htmlcomments"
+var comment_post_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/comment"
 
 var vcard_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/vcard?u="
 var photo_url = "https://unidirectory.auckland.ac.nz/people/imageraw/{0}/{1}/small"
@@ -16,6 +18,11 @@ String.prototype.format = function() {
     }
     return formatted;
 };
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
+}
 
 function data_fetch(url, type){	
 	var xhttp = new XMLHttpRequest();
@@ -35,6 +42,9 @@ function data_fetch(url, type){
 						break;
 					case "notices":
 						notices_process();
+						break;
+					case "comments":
+						comments_process();
 						break;
 				}
 			}
@@ -279,6 +289,44 @@ function notices_process() {
 }
 
 
+function comments_process() {
+	var content = document.getElementById("guestbookcomments");
+	var guestbooktemplate = "<table><tr><th><p>Comments</p></th></tr><tr><td>{0}</td></tr></table>"
+	console.log("comments updated");	
+	content.innerHTML = guestbooktemplate.format(response);
+}
+
+
+function post_comment() {
+	var comment = document.getElementById("comment").value;
+	var name = document.getElementById("name").value;
+
+	if (comment == "") {
+		alert("Please enter a comment");
+		return;
+	}
+	else if (name == "") {
+		alert("Please enter a name");
+		return;
+	}
+
+	var xhr = new XMLHttpRequest();
+	var url = comment_post_url + "?Name=" + name;
+	console.log(url);
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhr.onload = function (){
+		console.log("POST is successful");i
+		document.getElementById("comment").value = "";
+		document.getElementById("name").value = "";
+		sleepFor(90);
+		data_fetch(comments_url, "comments");
+	}
+	xhr.send(JSON.stringify(comment));
+
+
+}
+
 
 function section_display_toggle(id) {
 	var section = document.getElementById(id);
@@ -313,8 +361,11 @@ window.onload = function() {
 	data_fetch(people_url, "people");
 	data_fetch(news_url, "news");
 	data_fetch(notices_url, "notices");
+	data_fetch(comments_url, "comments");
 
 	section_display_toggle("home");
 	setInterval(function(){data_fetch(news_url, "news")}, 10000);
 	setInterval(function(){data_fetch(notices_url, "notices")}, 10000);
+	setInterval(function(){data_fetch(comments_url, "comments")}, 10000);
 }
+
