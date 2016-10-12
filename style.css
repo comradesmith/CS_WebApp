@@ -1,3 +1,8 @@
+/*
+	CS335 - a2
+	Author: Cameron Smith - csmi928 - 706899195
+*/
+
 * {
 	font-size: large;
 	margin:0; 
@@ -89,7 +94,15 @@ section {
 	margin-right: auto;
 }
 
+#homecontent {
+	color: #4A45CA;
+	background: #FFFFFF;
+	padding: 16px;
+
+}
+
 #coursestable {
+	color: #FFFFFF;
 	text-align: left;
 }
 
@@ -126,6 +139,10 @@ section {
 	max-width: 85%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#peopletable td {
+	padding-bottom: 0px;
 }
 
 .personname {
@@ -165,6 +182,21 @@ section {
 
 .persondescription p {
 	font-size: 55%;
+}
+
+.persondetails {
+	text-align: justify;
+}
+
+.persondetails span {
+	width: 100%;
+	height: 1px;
+	display: inline-block;
+}
+
+
+.persondetails a {
+	text-decoration: underline;
 }
 
 .feed th {
@@ -262,6 +294,15 @@ td {
 aside {
 	float: right;
 	padding: 8px;
+}
+
+h1 {
+	color: #FFFFFF;
+}
+
+hr {
+	margin-bottom: 16px;
+	border: #FFFFFF solid 1px;
 }
 
 

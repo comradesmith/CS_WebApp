@@ -1,3 +1,8 @@
+/*
+	CS335 - a2
+	Author: Cameron Smith - csmi928 - 706899195
+*/
+
 var courses_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/courses"
 var people_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/people"
 var news_url = "http://redsox.tcs.auckland.ac.nz/ups/UniProxService.svc/newsfeed"
@@ -93,7 +98,6 @@ function courses_process() {
 
 			new_course.subject.courseA = old_code+ "/" + new_code;
 
-			/* TODO ; merge points, and replace empty strings for fields such as description */
 			var old_points = old_course.subject.points.split(" ")[0];
 			var new_points = new_course.subject.points
 
@@ -108,58 +112,58 @@ function courses_process() {
 	for(key in stages){
 		var stage = stages[key];
 		var stage_data = ""
-		for(i=0; i<stage.courses.length; i++){
-			var course = stage.courses[i];
-			var base_course_code = course.subject.courseA.split(" ")[1].substr(0, 3);
-			var course_header = "<h2>" + course.subject.courseA + "</h2>" + "<p>";
-			course_header += course.title + "</p>";
-			var course_data = "<p>" + course.description +'</p><br><p style="font-size: smaller; 								font-weight: bold;">' + course.subject.points;
-			if(typeof course.prerequisite == "undefined"){
-				course_data += "</p>";
-			}
-			else if(typeof course.prerequisite != "string"){
-				for( key in course.prerequisite){
-					course_data += "<br>" + course.prerequisite[key];
-				}
-			}
-			else{
-				course_data += "<br>" + course.prerequisite;
-			}
+	for(i=0; i<stage.courses.length; i++){
+		var course = stage.courses[i];
+		var base_course_code = course.subject.courseA.split(" ")[1].substr(0, 3);
+		var course_header = "<h2>" + course.subject.courseA + "</h2>" + "<p>";
+		course_header += course.title + "</p>";
+		var course_data = "<p>" + course.description +'</p><br><p style="font-size: smaller; 								font-weight: bold;">' + course.subject.points;
+		if(typeof course.prerequisite == "undefined"){
 			course_data += "</p>";
-			var toggle_button = data_toggle_template.format(base_course_code, base_course_code);
-			stage_data += course_template.format(toggle_button, course_header, base_course_code, course_data);
-		}	
+		}
+		else if(typeof course.prerequisite != "string"){
+			for( key in course.prerequisite){
+				course_data += "<br>" + course.prerequisite[key];
+			}
+		}
+		else{
+			course_data += "<br>" + course.prerequisite;
+		}
+		course_data += "</p>";
+		var toggle_button = data_toggle_template.format(base_course_code, base_course_code);
+		stage_data += course_template.format(toggle_button, course_header, base_course_code, course_data);
+	}	
 
-		target.innerHTML += stage_template.format(stage.number, stage_data);
-		target.innerHTML += "<br>"
-	}
+	target.innerHTML += stage_template.format(stage.number, stage_data);
+	target.innerHTML += "<br>"
+}
 }
 
 
 function togglecoursedata(course_id) {
-	var row = document.getElementById(course_id);
-	var button = document.getElementById(course_id + "button");
-	if (row.style.display == "none" || row.style.display == ""){
-		row.style.display = "table";
-		button.innerHTML = "&#9650";
-	}
-	else {
-		row.style.display = "none";
-		button.innerHTML = "&#9660";
-	}
+var row = document.getElementById(course_id);
+var button = document.getElementById(course_id + "button");
+if (row.style.display == "none" || row.style.display == ""){
+	row.style.display = "table";
+	button.innerHTML = "&#9650";
+}
+else {
+	row.style.display = "none";
+	button.innerHTML = "&#9660";
+}
 }
 
 
 function people_process() {
-	var json = JSON.parse(response);	
-	json = json.list;
-	json.sort(function(a, b){
-		if( a.lastname < b.lastname) return -1;
-		if( a.lastname > b.lastname) return 1;
-		return 0;
-	});
-	var personTemplate = "<table><tr><th>{0}</th></tr><tr><td><p>{1}</p></td></tr></table><br>";
-	var vcardLinkTemplate = '<a href="' + vcard_url + '{0}">☎</a>';
+var json = JSON.parse(response);	
+json = json.list;
+json.sort(function(a, b){
+	if( a.lastname < b.lastname) return -1;
+	if( a.lastname > b.lastname) return 1;
+	return 0;
+});
+var personTemplate = "<table><tr><th>{0}</th></tr><tr><td class='persondetails'><p>{1}<span></span></p></td></tr></table><br>";
+var vcardLinkTemplate = '<a href="' + vcard_url + '{0}">Details</a>';
 	var person;
 	var tablecontents = "";
 	var normaltitles = ["Mr", "Mrs", "Miss", "Ms", "Master", "undefined"];
@@ -213,12 +217,19 @@ function people_process() {
 		
 		header += name + "</p>";
 		header += "</div>";
+		
+		var email = person.emailAddresses[0];
 
 		var vcardLink = vcardLinkTemplate.format(person.profileUrl[1]);
-		var emaillink = "<a href=\"mailto:{0}\">Email me</a>".format(person.emailAddresses[0]);
-
-
-		var details = emaillink + " " + vcardLink;
+		var emaillink = "email:<a href=\"mailto:{0}\">{1}</a>".format(email, email);
+		if (typeof person.extn != "undefined"){
+			var extn = person.extn;
+			var extnlink = "extn:<a href=\"tel:{0}\">{1}</a>".format(extn, extn);
+		}
+		else {
+			var extnlink = "";
+		}
+		var details = emaillink + " " + extnlink + " " + vcardLink;
 		var person1Table = personTemplate.format(header, details);
 
 		tablecontents = tablecontents.concat(person1Table);
@@ -226,7 +237,7 @@ function people_process() {
 
 	var section = document.getElementById("people");
 	var peopleTable = section.querySelector("#peopletable");
-	peopleTable.innerHTML = tablecontents;
+	peopleTable.innerHTML += tablecontents;
 }
 
 
@@ -254,7 +265,8 @@ function news_process() {
 	}
 
 	console.log("news updated");
-	content.innerHTML = news;
+	content.innerHTML = "<h1>Notices</h1><hr/>";
+	content.innerHTML += news;
 
 }
 
@@ -284,8 +296,8 @@ function notices_process() {
 	}
 
 	console.log("notices updated");
-	content.innerHTML = notices;
-
+	content.innerHTML = "<h1>Notices</h1><hr/>";
+	content.innerHTML += notices;
 }
 
 
@@ -312,11 +324,9 @@ function post_comment() {
 
 	var xhr = new XMLHttpRequest();
 	var url = comment_post_url + "?Name=" + name;
-	console.log(url);
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhr.onload = function (){
-		console.log("POST is successful");i
 		document.getElementById("comment").value = "";
 		document.getElementById("name").value = "";
 		sleepFor(90);
