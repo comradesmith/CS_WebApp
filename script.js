@@ -224,7 +224,7 @@ var vcardLinkTemplate = '<a href="' + vcard_url + '{0}">Details</a>';
 		var emaillink = "email:<a href=\"mailto:{0}\">{1}</a>".format(email, email);
 		if (typeof person.extn != "undefined"){
 			var extn = person.extn;
-			var extnlink = "extn:<a href=\"tel:+6409373799,{0}\">{1}</a>".format(extn, extn);
+			var extnlink = "extn:<a href=\"tel:+64093737999,{0}\">{1}</a>".format(extn, extn);
 		}
 		else {
 			var extnlink = "";
