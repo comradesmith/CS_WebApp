@@ -8,13 +8,21 @@
 	margin:0; 
 	padding:0;
 	font-family: sans-serif;
+}
 
+html {
+	height: 100%;
 }
 
 body, html{	
-	height: 100%;
 	width: 100%;
 	background: #88BBFA;
+}
+
+body {
+	position: relative;
+	min-height: 100%;
+	border-bottom: 8px solid #3530A0;
 }
 
 p {
@@ -33,8 +41,8 @@ header {
 	color: white;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top:	20px;
 	margin-bottom: 20px;
+	padding-top: 20px;
 }
 
 #logo {
@@ -92,6 +100,7 @@ section {
 	width: 99%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 30px;
 }
 
 #homecontent {
@@ -136,7 +145,6 @@ section {
 }
 
 #peopletable {
-	max-width: 85%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -185,6 +193,7 @@ section {
 }
 
 .persondetails {
+	font-size: medium;
 	text-align: justify;
 }
 
@@ -196,6 +205,7 @@ section {
 
 
 .persondetails a {
+	font-size: smaller;
 	text-decoration: underline;
 }
 
@@ -268,7 +278,18 @@ textarea {
 	margin-bottom: 16px;
 }
 
+#footerleft {
+	float: left;
+	font-size: small;
+}
+
+#footerright {
+	float: right;
+	font-size: small;
+}
+
 table, tr, td, th {
+	background: #FFFFFF;
 	border: 3px solid white;
 	border-collapse: collapse;
 	padding: 5px;
@@ -294,6 +315,18 @@ td {
 aside {
 	float: right;
 	padding: 8px;
+}
+
+footer {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: #FFFFFF;
+	background: #3530A0;
+	width: 100%;
+	height: 30px;
+	padding-top: 4px;
 }
 
 h1 {
