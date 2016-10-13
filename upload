@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# upload files to my testing site
+
 files="index.html script.js style.css"
 
 for file in $files
